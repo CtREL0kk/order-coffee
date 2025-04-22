@@ -83,11 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .map(el => el.nextElementSibling.textContent)
                 .join(', ');
 
+            const additions = beverage.querySelector('textarea').value;
+
             const row = document.createElement('tr');
             row.innerHTML = `
               <td>${drink}</td>
               <td>${milk}</td>
               <td>${extras}</td>
+              <td>${additions}</td>
             `;
             tbody.appendChild(row);
         });
