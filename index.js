@@ -90,4 +90,23 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
         location.reload();
     });
+
+    const confirmButton = document.getElementById('confirm-order');
+    const timeInput = document.getElementById('order-time');
+
+    confirmButton.addEventListener('click', () => {
+        const now = new Date();
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        const [hours, minutes] = timeInput.value.split(':').map(Number);
+        const selectedMinutes = hours * 60 + minutes;
+
+        if (selectedMinutes <= currentMinutes || isNaN(selectedMinutes)) {
+            timeInput.style.border = '2px solid red';
+            alert('Мы не умеем перемещаться во времени. Выберите время позже, чем текущее');
+        } else {
+            timeInput.style.border = '';
+            modal.classList.add('hidden');
+            location.reload();}
+    });
 });

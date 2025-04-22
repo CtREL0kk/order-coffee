@@ -70,7 +70,6 @@
       <div class="modal-overlay"></div>
       <div class="modal-window">
         <button class="modal-close" id="close-modal">&times;</button>
-        <p id="modal-title">Заказ принят!</p>
         <p id="drink-count"></p>
         <table id="order-table">
           <thead>
@@ -82,6 +81,11 @@
           </thead>
           <tbody></tbody>
         </table>
+
+        <label for="order-time">Выберите время заказа</label>
+        <input type="time" id="order-time" />
+
+        <button id="confirm-order">Оформить</button>
       </div>
     </div>
   </body>
