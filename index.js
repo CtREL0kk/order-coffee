@@ -20,8 +20,39 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const checkboxes = newBeverage.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => checkbox.checked = false);
+
+        const removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.classList.add('remove-button');
+        removeButton.innerHTML = '&#10006;';
+        newBeverage.appendChild(removeButton);
+
         form.insertBefore(newBeverage, addButton.parentElement);
+        updateRemoveButtonState();
     });
+
+    form.addEventListener('click', (e) => {
+        if (e.target.classList.contains('remove-button')) {
+            const beverageFieldset = e.target.closest('fieldset');
+            if (document.querySelectorAll('.beverage').length > 1) {
+                beverageFieldset.remove();
+            }
+        }
+    });
+
+    function updateRemoveButtonState() {
+        const beverages = document.querySelectorAll('.beverage');
+        beverages.forEach(beverage => {
+            const removeButton = beverage.querySelector('.remove-button');
+            if (beverages.length === 1) {
+                removeButton.style.display = 'none';
+            } else {
+                removeButton.style.display = 'block';
+            }
+        });
+    }
+
+    updateRemoveButtonState();
 
     submitButton = document.querySelector('.submit-button')
     modal = document.querySelector('.modal')
@@ -72,6 +103,3 @@ document.addEventListener('DOMContentLoaded', () => {
         location.reload();
     });
 });
-
-
-
