@@ -24,6 +24,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkboxes = newBeverage.querySelectorAll('input[type="checkbox"]');
         checkboxes.forEach(checkbox => checkbox.checked = false);
 
+        const textAreas = newBeverage.querySelectorAll('textarea');
+        textAreas.forEach(textArea => textArea.value = '');
+
         const removeButton = document.createElement('button');
         removeButton.type = 'button';
         removeButton.classList.add('remove-button');
@@ -31,6 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
         newBeverage.appendChild(removeButton);
 
         form.insertBefore(newBeverage, addButton.parentElement);
+
+        const newTextArea = newBeverage.querySelector('textarea');
+        const output = newBeverage.querySelector('.output');
+        output.innerHTML = 'Текст пользователя: ';
+        handleTextAreaInput(newTextArea, output);
+
         updateRemoveButtonState();
     });
 
@@ -74,11 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 .map(el => el.nextElementSibling.textContent)
                 .join(', ');
 
+            const additions = beverage.querySelector('textarea').value;
+
             const row = document.createElement('tr');
             row.innerHTML = `
               <td>${drink}</td>
               <td>${milk}</td>
               <td>${extras}</td>
+              <td>${additions}</td>
             `;
             tbody.appendChild(row);
         });
@@ -90,6 +102,30 @@ document.addEventListener('DOMContentLoaded', () => {
         modal.classList.add('hidden');
         location.reload();
     });
+
+    function handleTextAreaInput(textArea, output) {
+        const urgentWords = ['срочно', 'побыстрее', 'быстрее', 'скорее', 'поскорее', 'очень нужно'];
+
+        function highlightUrgentWords(text) {
+            let updatedText = text;
+            urgentWords.forEach(word => {
+                const regex = new RegExp(`(${word})`, 'gi');
+                updatedText = updatedText.replace(regex, '<b>$1</b>');
+            });
+            return updatedText;
+        }
+
+        textArea.addEventListener('input', function () {
+            const userInput = textArea.value;
+            const highlightedText = highlightUrgentWords(userInput);
+            output.innerHTML = 'Текст пользователя: ' + highlightedText;
+        });
+    }
+
+    const firstTextArea = document.querySelector('.beverage textarea');
+    const firstOutput = document.querySelector('.beverage .output');
+
+    handleTextAreaInput(firstTextArea, firstOutput);
 
     const confirmButton = document.getElementById('confirm-order');
     const timeInput = document.getElementById('order-time');
