@@ -45,3 +45,19 @@
     border-radius: 5px;
 }
 
+.remove-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+fieldset {
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
