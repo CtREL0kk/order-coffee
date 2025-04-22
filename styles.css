@@ -114,7 +114,7 @@ fieldset {
 
 #order-table th,
 #order-table td {
-    border: 1px solid #ccc;
+    border: 1px solid;
     padding: 8px;
     text-align: left;
 }
