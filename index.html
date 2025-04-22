@@ -65,5 +65,23 @@
     </form>
 
     <script src="index.js"></script>
+    <div id="modal" class="modal hidden">
+      <div class="modal-overlay"></div>
+      <div class="modal-window">
+        <button class="modal-close" id="close-modal">&times;</button>
+        <p id="modal-title">Заказ принят!</p>
+        <p id="drink-count"></p>
+        <table id="order-table">
+          <thead>
+          <tr>
+            <th>Напиток</th>
+            <th>Молоко</th>
+            <th>Дополнительно</th>
+          </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
   </body>
 </html>
